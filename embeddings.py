@@ -7,7 +7,11 @@ porque descarga el modelo y lo corre en la máquina local o en cloud.
 
 import numpy as np
 import os
-import torch
+
+try:
+    import torch
+except ImportError:
+    torch = None
 
 ESM_MODELS = {
     'esm2_t6_8M_UR50D': {
@@ -40,11 +44,14 @@ DEFAULT_MODEL = 'esm2_t6_8M_UR50D'
 
 class ProteinEmbedder:
     def __init__(self, model_name=None, device=None):
+        if torch is None:
+            raise ImportError("PyTorch no está instalado. Instala con: pip install torch")
+
         if model_name is None:
             model_name = DEFAULT_MODEL
 
         if model_name not in ESM_MODELS:
-            raise ValueError(f"Modelo {model_name} no encontrado. Opciones: {list(ESM_MODELS.keys())}")
+            raise ValueError(f"Modelo {model_name} no encontrado. Opciones: {list(SM_MODELS.keys())}")
 
         self.model_name = model_name
         self.config = ESM_MODELS[model_name]

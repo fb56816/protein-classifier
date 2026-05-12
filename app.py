@@ -146,7 +146,9 @@ def cargar_modelo():
 
     if use_emb:
         try:
-            from embeddings import ProteinEmbedder
+            import importlib
+            emb_module = importlib.import_module('embeddings')
+            ProteinEmbedder = emb_module.ProteinEmbedder
             embedder = ProteinEmbedder(model_name=esm_model)
         except Exception:
             use_emb = False
