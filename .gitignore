@@ -1,0 +1,11 @@
+*.joblib
+!modelos/clasificador_proteinas.joblib
+!modelos/label_encoder.joblib
+!modelos/scaler_manual.joblib
+!modelos/feature_info.json
+__pycache__/
+*.pyc
+embeddings_cache/
+data/
+.env
+.venv/
